@@ -1,7 +1,8 @@
-using Blazor.Extensions.Canvas.Model;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
+using Blazor.Extensions.Canvas.Components;
+using Blazor.Extensions.Canvas.Models;
 
 namespace Blazor.Extensions.Canvas.Canvas2D
 {
@@ -101,7 +102,7 @@ namespace Blazor.Extensions.Canvas.Canvas2D
 
         #endregion Properties
 
-        public Canvas2DContext(BECanvasComponent reference) : base(reference, CONTEXT_NAME)
+        public Canvas2DContext(BECanvas reference) : base(reference, CONTEXT_NAME)
         {
         }
 

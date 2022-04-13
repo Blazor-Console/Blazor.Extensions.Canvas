@@ -1,14 +1,16 @@
 using Blazor.Extensions.Canvas.Canvas2D;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using Blazor.Extensions.Canvas.Components;
+using Blazor.Extensions.Canvas.Extensions;
 
 namespace Blazor.Extensions.Canvas.Test.ClientSide.Pages
 {
-    public class IndexComponent : ComponentBase
+    public partial class Index : ComponentBase
     {
         private Canvas2DContext _context;
 
-        protected BECanvasComponent _canvasReference;
+        protected BECanvas _canvasReference;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

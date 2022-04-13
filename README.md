@@ -1,7 +1,7 @@
 # Canvas
 HTML5 Canvas API implementation for Microsoft Blazor
 
-[![Build](https://github.com/BlazorExtensions/Canvas/workflows/CI/badge.svg)](https://github.com/BlazorExtensions/Canvas/actions)
+[![Build](https://github.com/Blazor-Console/Blazor.Extensions.Canvas/workflows/CI/badge.svg)](https://github.com/Blazor-Console/Blazor.Extensions.Canvas/actions)
 [![Package Version](https://img.shields.io/nuget/v/Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/Blazor.Extensions.Canvas)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/Blazor.Extensions.Canvas)
 [![License](https://img.shields.io/github/license/BlazorExtensions/Canvas.svg)](https://github.com/BlazorExtensions/Canvas/blob/master/LICENSE)
@@ -18,7 +18,7 @@ Both Canvas 2D and WebGL are supported.
 
 Both Blazor Server Apps and Blazor WebAssembly Apps are supported.
 
-**NOTE** Currently targets the v3.1.5 of Blazor with 3.2.0 of WebAssembly
+**NOTE** Currently targets the .NET-6 v6.0.4 of Blazor with 6.0.4 of WebAssembly
 
 # Installation
 

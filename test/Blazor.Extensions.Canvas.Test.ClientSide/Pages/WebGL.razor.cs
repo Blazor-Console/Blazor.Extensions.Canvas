@@ -1,15 +1,17 @@
 using System;
 using System.Threading.Tasks;
+using Blazor.Extensions.Canvas.Components;
+using Blazor.Extensions.Canvas.Extensions;
 using Blazor.Extensions.Canvas.WebGL;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Extensions.Canvas.Test.ClientSide.Pages
 {
-    public class WebGLComponent : ComponentBase
+    public partial class WebGL : ComponentBase
     {
         private WebGLContext _context;
 
-        protected BECanvasComponent _canvasReference;
+        protected BECanvas _canvasReference;
 
         private const string VS_SOURCE = "attribute vec3 aPos;" +
                                          "attribute vec3 aColor;" +
