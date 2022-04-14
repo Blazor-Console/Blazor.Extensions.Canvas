@@ -13,6 +13,13 @@
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <RazorLangVersion>latest</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  
   <ItemGroup>
     <WebpackInputs Include="**\*.ts" Exclude="dist\**;node_modules\**" />
   </ItemGroup>
