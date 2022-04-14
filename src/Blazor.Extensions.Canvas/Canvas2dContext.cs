@@ -216,37 +216,37 @@ namespace Blazor.Extensions
         }
 
         #region Methods
-        public void FillRect(double x, double y, double width, double height) => this.CallMethod<object>(FILL_RECT_METHOD, new object[] { x, y, width, height });
-        public void ClearRect(double x, double y, double width, double height) => this.CallMethod<object>(CLEAR_RECT_METHOD, new object[] { x, y, width, height });
-        public void StrokeRect(double x, double y, double width, double height) => this.CallMethod<object>(STROKE_RECT_METHOD, new object[] { x, y, width, height });
-        public void FillText(string text, double x, double y, double? maxWidth = null) => this.CallMethod<object>(FILL_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
-        public void StrokeText(string text, double x, double y, double? maxWidth = null) => this.CallMethod<object>(STROKE_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
-        public ValueTask<TextMetrics> MeasureText(string text) => this.CallMethod<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
-        public ValueTask<float[]> GetLineDash() => this.CallMethod<float[]>(GET_LINE_DASH_METHOD);
-        public void SetLineDash(float[] segments) => this.CallMethod<object>(SET_LINE_DASH_METHOD, new object[] { segments });
-        public void BeginPath() => this.CallMethod<object>(BEGIN_PATH_METHOD);
-        public void ClosePath() => this.CallMethod<object>(CLOSE_PATH_METHOD);
-        public void MoveTo(double x, double y) => this.CallMethod<object>(MOVE_TO_METHOD, new object[] { x, y });
-        public void LineTo(double x, double y) => this.CallMethod<object>(LINE_TO_METHOD, new object[] { x, y });
-        public void BezierCurveTo(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y) => this.CallMethod<object>(BEZIER_CURVE_TO_METHOD, new object[] { cp1x, cp1y, cp2x, cp2y, x, y });
-        public void QuadraticCurveTo(double cpx, double cpy, double x, double y) => this.CallMethod<object>(QUADRATIC_CURVE_TO_METHOD, new object[] { cpx, cpy, x, y });
-        public void Arc(double x, double y, double radius, double startAngle, double endAngle, bool? anticlockwise = null) => this.CallMethod<object>(ARC_METHOD, anticlockwise.HasValue ? new object[] { x, y, radius, startAngle, endAngle, anticlockwise.Value } : new object[] { x, y, radius, startAngle, endAngle });
-        public void ArcTo(double x1, double y1, double x2, double y2, double radius) => this.CallMethod<object>(ARC_TO_METHOD, new object[] { x1, y1, x2, y2, radius });
-        public void Rect(double x, double y, double width, double height) => this.CallMethod<object>(RECT_METHOD, new object[] { x, y, width, height });
-        public void Fill() => this.CallMethod<object>(FILL_METHOD);
-        public void Stroke() => this.CallMethod<object>(STROKE_METHOD);
-        public void DrawFocusIfNeeded(ElementReference elementReference) => this.CallMethod<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
-        public void ScrollPathIntoView() => this.CallMethod<object>(SCROLL_PATH_INTO_VIEW_METHOD);
-        public void Clip() => this.CallMethod<object>(CLIP_METHOD);
-        public ValueTask<bool> IsPointInPath(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
-        public ValueTask<bool> IsPointInStroke(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
-        public void Rotate(float angle) => this.CallMethod<object>(ROTATE_METHOD, new object[] { angle });
-        public void Scale(double x, double y) => this.CallMethod<object>(SCALE_METHOD, new object[] { x, y });
-        public void Translate(double x, double y) => this.CallMethod<object>(TRANSLATE_METHOD, new object[] { x, y });
-        public void Transform(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethod<object>(TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
-        public void SetTransform(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethod<object>(SET_TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
-        public void Save() => this.CallMethod<object>(SAVE_METHOD);
-        public void Restore() => this.CallMethod<object>(RESTORE_METHOD);
+        public async Task FillRectAsync(double x, double y, double width, double height) => await this.CallMethod<object>(FILL_RECT_METHOD, new object[] { x, y, width, height });
+        public async Task ClearRectAsync(double x, double y, double width, double height) => await this.CallMethod<object>(CLEAR_RECT_METHOD, new object[] { x, y, width, height });
+        public async void StrokeRectAsync(double x, double y, double width, double height) => await this.CallMethod<object>(STROKE_RECT_METHOD, new object[] { x, y, width, height });
+        public async void FillTextAsync(string text, double x, double y, double? maxWidth = null) => await this.CallMethod<object>(FILL_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
+        public async void StrokeTextAsync(string text, double x, double y, double? maxWidth = null) => await this.CallMethod<object>(STROKE_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
+        public async ValueTask<TextMetrics> MeasureTextAsync(string text) => await this.CallMethod<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
+        public async ValueTask<float[]> GetLineDashAsync() => await this.CallMethod<float[]>(GET_LINE_DASH_METHOD);
+        public async void SetLineDashAsync(float[] segments) => await this.CallMethod<object>(SET_LINE_DASH_METHOD, new object[] { segments });
+        public async void BeginPathAsync() => await this.CallMethod<object>(BEGIN_PATH_METHOD);
+        public async void ClosePathAsync() => await this.CallMethod<object>(CLOSE_PATH_METHOD);
+        public async void MoveToAsync(double x, double y) => await this.CallMethod<object>(MOVE_TO_METHOD, new object[] { x, y });
+        public async void LineToAsync(double x, double y) => await this.CallMethod<object>(LINE_TO_METHOD, new object[] { x, y });
+        public async void BezierCurveToAsync(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y) => await this.CallMethod<object>(BEZIER_CURVE_TO_METHOD, new object[] { cp1x, cp1y, cp2x, cp2y, x, y });
+        public async void QuadraticCurveToAsync(double cpx, double cpy, double x, double y) => await this.CallMethod<object>(QUADRATIC_CURVE_TO_METHOD, new object[] { cpx, cpy, x, y });
+        public async void ArcAsync(double x, double y, double radius, double startAngle, double endAngle, bool? anticlockwise = null) => await this.CallMethod<object>(ARC_METHOD, anticlockwise.HasValue ? new object[] { x, y, radius, startAngle, endAngle, anticlockwise.Value } : new object[] { x, y, radius, startAngle, endAngle });
+        public async void ArcToAsync(double x1, double y1, double x2, double y2, double radius) => await this.CallMethod<object>(ARC_TO_METHOD, new object[] { x1, y1, x2, y2, radius });
+        public async void RectAsync(double x, double y, double width, double height) => await this.CallMethod<object>(RECT_METHOD, new object[] { x, y, width, height });
+        public async void FillAsync() => await this.CallMethod<object>(FILL_METHOD);
+        public async void StrokeAsync() => await this.CallMethod<object>(STROKE_METHOD);
+        public async void DrawFocusIfNeededAsync(ElementReference elementReference) => await this.CallMethod<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
+        public async void ScrollPathIntoViewAsync() => await this.CallMethod<object>(SCROLL_PATH_INTO_VIEW_METHOD);
+        public async void ClipAsync() => await this.CallMethod<object>(CLIP_METHOD);
+        public async ValueTask<bool> IsPointInPathAsync(double x, double y) => await this.CallMethod<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
+        public async ValueTask<bool> IsPointInStrokeAsync(double x, double y) => await this.CallMethod<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
+        public async void RotateAsync(float angle) => await this.CallMethod<object>(ROTATE_METHOD, new object[] { angle });
+        public async void ScaleAsync(double x, double y) => await this.CallMethod<object>(SCALE_METHOD, new object[] { x, y });
+        public async void TranslateAsync(double x, double y) => await this.CallMethod<object>(TRANSLATE_METHOD, new object[] { x, y });
+        public async void TransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => await this.CallMethod<object>(TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
+        public async void SetTransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => await this.CallMethod<object>(SET_TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
+        public async void SaveAsync() => await this.CallMethod<object>(SAVE_METHOD);
+        public async void RestoreAsync() => await this.CallMethod<object>(RESTORE_METHOD);
         #endregion
 
         #region Private Methods
