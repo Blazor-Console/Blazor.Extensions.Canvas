@@ -1,6 +1,8 @@
 @inherits BECanvasComponent
 
-<canvas id="@Id" width="@Width" height="@Height" @ref="_canvasRef" @attributes="InputAttributes"></canvas>
+<canvas id="@Id" width="@Width" height="@Height" @ref="_canvasRef" @attributes="InputAttributes"
+        onclick="@OnClick" onmousedown="@OnMouseDown" onmousemove="@OnMouseMove" onmouseout="@OnMouseOut"
+        onmouseover="@OnMouseOver" onmouseup="@OnMouseUp" onmousewheel="@OnMouseWheel"></canvas>
 
 @code {
     [Parameter(CaptureUnmatchedValues = true)]
