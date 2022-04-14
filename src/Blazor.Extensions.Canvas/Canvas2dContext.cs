@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Blazor;
+using Blazor.Extensions.Canvas.Canvas2D;
+using Blazor.Extensions.Canvas.Model;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Threading.Tasks;
 using static Blazor.Extensions.Canvas2dContextConstants;
 
 namespace Blazor.Extensions
@@ -201,13 +204,15 @@ namespace Blazor.Extensions
             }
         }
 
-        public ElementRef Canvas { get; private set; }
+        public ElementReference Canvas { get; private set; }
+
+        [Inject] public IJSRuntime JSRuntime { get; set; }
         #endregion
 
         internal Canvas2dContext(BECanvasComponent canvasReference)
         {
             this.Canvas = canvasReference.CanvasReference;
-            ((IJSInProcessRuntime)JSRuntime.Current).Invoke<object>(ADD_CANVAS_ACTION, this.Canvas);
+            this.JSRuntime.InvokeAsync<object>(ADD_CANVAS_ACTION, this.Canvas);
         }
 
         #region Methods
@@ -216,8 +221,8 @@ namespace Blazor.Extensions
         public void StrokeRect(double x, double y, double width, double height) => this.CallMethod<object>(STROKE_RECT_METHOD, new object[] { x, y, width, height });
         public void FillText(string text, double x, double y, double? maxWidth = null) => this.CallMethod<object>(FILL_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
         public void StrokeText(string text, double x, double y, double? maxWidth = null) => this.CallMethod<object>(STROKE_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
-        public TextMetrics MeasureText(string text) => this.CallMethod<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
-        public float[] GetLineDash() => this.CallMethod<float[]>(GET_LINE_DASH_METHOD);
+        public ValueTask<TextMetrics> MeasureText(string text) => this.CallMethod<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
+        public ValueTask<float[]> GetLineDash() => this.CallMethod<float[]>(GET_LINE_DASH_METHOD);
         public void SetLineDash(float[] segments) => this.CallMethod<object>(SET_LINE_DASH_METHOD, new object[] { segments });
         public void BeginPath() => this.CallMethod<object>(BEGIN_PATH_METHOD);
         public void ClosePath() => this.CallMethod<object>(CLOSE_PATH_METHOD);
@@ -230,11 +235,11 @@ namespace Blazor.Extensions
         public void Rect(double x, double y, double width, double height) => this.CallMethod<object>(RECT_METHOD, new object[] { x, y, width, height });
         public void Fill() => this.CallMethod<object>(FILL_METHOD);
         public void Stroke() => this.CallMethod<object>(STROKE_METHOD);
-        public void DrawFocusIfNeeded(ElementRef elementReference) => this.CallMethod<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
+        public void DrawFocusIfNeeded(ElementReference elementReference) => this.CallMethod<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
         public void ScrollPathIntoView() => this.CallMethod<object>(SCROLL_PATH_INTO_VIEW_METHOD);
         public void Clip() => this.CallMethod<object>(CLIP_METHOD);
-        public bool IsPointInPath(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
-        public bool IsPointInStroke(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
+        public ValueTask<bool> IsPointInPath(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
+        public ValueTask<bool> IsPointInStroke(double x, double y) => this.CallMethod<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
         public void Rotate(float angle) => this.CallMethod<object>(ROTATE_METHOD, new object[] { angle });
         public void Scale(double x, double y) => this.CallMethod<object>(SCALE_METHOD, new object[] { x, y });
         public void Translate(double x, double y) => this.CallMethod<object>(TRANSLATE_METHOD, new object[] { x, y });
@@ -247,22 +252,22 @@ namespace Blazor.Extensions
         #region Private Methods
         private void SetProperty(string property, object value)
         {
-            ((IJSInProcessRuntime)JSRuntime.Current).Invoke<object>(SET_CANVAS_PROPERTY_ACTION, this.Canvas, property, value);
+            this.JSRuntime.InvokeAsync<object>(SET_CANVAS_PROPERTY_ACTION, this.Canvas, property, value);
         }
 
-        private T CallMethod<T>(string method)
+        private ValueTask<T> CallMethod<T>(string method)
         {
-            return ((IJSInProcessRuntime)JSRuntime.Current).Invoke<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method);
+            return this.JSRuntime.InvokeAsync<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method);
         }
 
-        private T CallMethod<T>(string method, object value)
+        private ValueTask<T> CallMethod<T>(string method, object value)
         {
-            return ((IJSInProcessRuntime)JSRuntime.Current).Invoke<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method, value);
+            return this.JSRuntime.InvokeAsync<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method, value);
         }
 
         public void Dispose()
         {
-            ((IJSInProcessRuntime)JSRuntime.Current).Invoke<object>(REMOVE_CANVAS_ACTION, this.Canvas);
+            this.JSRuntime.InvokeAsync<object>(REMOVE_CANVAS_ACTION, this.Canvas);
         } 
         #endregion
     }

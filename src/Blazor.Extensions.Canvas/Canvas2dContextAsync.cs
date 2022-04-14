@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.Blazor;
+using Blazor.Extensions.Canvas.Canvas2D;
+using Blazor.Extensions.Canvas.Model;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
@@ -42,58 +44,60 @@ namespace Blazor.Extensions
 
         public IAsyncProperty<float> GlobalAlpha => this.CreateAsyncProperty<float>(GLOBAL_ALPHA_PROPERTY);
 
-        public ElementRef Canvas { get; private set; }
-        
+        public ElementReference Canvas { get; private set; }
+
+        [Inject] public IJSRuntime JSRuntime { get; set; }
+
         #endregion
 
         internal Canvas2dContextAsync(BECanvasComponent canvasReference) => this.Canvas = canvasReference.CanvasReference;
 
         internal async Task<Canvas2dContextAsync> AddCanvasAsync()
         {
-            await JSRuntime.Current.InvokeAsync<object>(ADD_CANVAS_ACTION, this.Canvas);
+            await this.JSRuntime.InvokeAsync<object>(ADD_CANVAS_ACTION, this.Canvas);
             return this;
         }
 
         #region Methods
-        public Task FillRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(FILL_RECT_METHOD, new object[] { x, y, width, height });
-        public Task ClearRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(CLEAR_RECT_METHOD, new object[] { x, y, width, height });
-        public Task StrokeRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(STROKE_RECT_METHOD, new object[] { x, y, width, height });
-        public Task FillTextAsync(string text, double x, double y, double? maxWidth = null) => this.CallMethodAsync<object>(FILL_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
-        public Task StrokeTextAsync(string text, double x, double y, double? maxWidth = null) => this.CallMethodAsync<object>(STROKE_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
-        public Task<TextMetrics> MeasureTextAsync(string text) => this.CallMethodAsync<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
-        public Task<float[]> GetLineDashAsync() => this.CallMethodAsync<float[]>(GET_LINE_DASH_METHOD);
-        public Task SetLineDashAsync(float[] segments) => this.CallMethodAsync<object>(SET_LINE_DASH_METHOD, new object[] { segments });
-        public Task BeginPathAsync() => this.CallMethodAsync<object>(BEGIN_PATH_METHOD);
-        public Task ClosePathAsync() => this.CallMethodAsync<object>(CLOSE_PATH_METHOD);
-        public Task MoveToAsync(double x, double y) => this.CallMethodAsync<object>(MOVE_TO_METHOD, new object[] { x, y });
-        public Task LineToAsync(double x, double y) => this.CallMethodAsync<object>(LINE_TO_METHOD, new object[] { x, y });
-        public Task BezierCurveToAsync(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y) => this.CallMethodAsync<object>(BEZIER_CURVE_TO_METHOD, new object[] { cp1x, cp1y, cp2x, cp2y, x, y });
-        public Task QuadraticCurveToAsync(double cpx, double cpy, double x, double y) => this.CallMethodAsync<object>(QUADRATIC_CURVE_TO_METHOD, new object[] { cpx, cpy, x, y });
-        public Task ArcAsync(double x, double y, double radius, double startAngle, double endAngle, bool? anticlockwise = null) => this.CallMethodAsync<object>(ARC_METHOD, anticlockwise.HasValue ? new object[] { x, y, radius, startAngle, endAngle, anticlockwise.Value } : new object[] { x, y, radius, startAngle, endAngle });
-        public Task ArcToAsync(double x1, double y1, double x2, double y2, double radius) => this.CallMethodAsync<object>(ARC_TO_METHOD, new object[] { x1, y1, x2, y2, radius });
-        public Task RectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(RECT_METHOD, new object[] { x, y, width, height });
-        public Task FillAsync() => this.CallMethodAsync<object>(FILL_METHOD);
-        public Task StrokeAsync() => this.CallMethodAsync<object>(STROKE_METHOD);
-        public Task DrawFocusIfNeededAsync(ElementRef elementReference) => this.CallMethodAsync<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
-        public Task ScrollPathIntoViewAsync() => this.CallMethodAsync<object>(SCROLL_PATH_INTO_VIEW_METHOD);
-        public Task ClipAsync() => this.CallMethodAsync<object>(CLIP_METHOD);
-        public Task<bool> IsPointInPathAsync(double x, double y) => this.CallMethodAsync<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
-        public Task<bool> IsPointInStrokeAsync(double x, double y) => this.CallMethodAsync<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
-        public Task RotateAsync(float angle) => this.CallMethodAsync<object>(ROTATE_METHOD, new object[] { angle });
-        public Task ScaleAsync(double x, double y) => this.CallMethodAsync<object>(SCALE_METHOD, new object[] { x, y });
-        public Task TranslateAsync(double x, double y) => this.CallMethodAsync<object>(TRANSLATE_METHOD, new object[] { x, y });
-        public Task TransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethodAsync<object>(TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
-        public Task SetTransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethodAsync<object>(SET_TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
-        public Task SaveAsync() => this.CallMethodAsync<object>(SAVE_METHOD);
-        public Task RestoreAsync() => this.CallMethodAsync<object>(RESTORE_METHOD);
+        public ValueTask<object> FillRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(FILL_RECT_METHOD, new object[] { x, y, width, height });
+        public ValueTask<object> ClearRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(CLEAR_RECT_METHOD, new object[] { x, y, width, height });
+        public ValueTask<object> StrokeRectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(STROKE_RECT_METHOD, new object[] { x, y, width, height });
+        public ValueTask<object> FillTextAsync(string text, double x, double y, double? maxWidth = null) => this.CallMethodAsync<object>(FILL_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
+        public ValueTask<object> StrokeTextAsync(string text, double x, double y, double? maxWidth = null) => this.CallMethodAsync<object>(STROKE_TEXT_METHOD, maxWidth.HasValue ? new object[] { text, x, y, maxWidth.Value } : new object[] { text, x, y });
+        public ValueTask<TextMetrics> MeasureTextAsync(string text) => this.CallMethodAsync<TextMetrics>(MEASURE_TEXT_METHOD, new object[] { text });
+        public ValueTask<float[]> GetLineDashAsync() => this.CallMethodAsync<float[]>(GET_LINE_DASH_METHOD);
+        public ValueTask<object> SetLineDashAsync(float[] segments) => this.CallMethodAsync<object>(SET_LINE_DASH_METHOD, new object[] { segments });
+        public ValueTask<object> BeginPathAsync() => this.CallMethodAsync<object>(BEGIN_PATH_METHOD);
+        public ValueTask<object> ClosePathAsync() => this.CallMethodAsync<object>(CLOSE_PATH_METHOD);
+        public ValueTask<object> MoveToAsync(double x, double y) => this.CallMethodAsync<object>(MOVE_TO_METHOD, new object[] { x, y });
+        public ValueTask<object> LineToAsync(double x, double y) => this.CallMethodAsync<object>(LINE_TO_METHOD, new object[] { x, y });
+        public ValueTask<object> BezierCurveToAsync(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y) => this.CallMethodAsync<object>(BEZIER_CURVE_TO_METHOD, new object[] { cp1x, cp1y, cp2x, cp2y, x, y });
+        public ValueTask<object> QuadraticCurveToAsync(double cpx, double cpy, double x, double y) => this.CallMethodAsync<object>(QUADRATIC_CURVE_TO_METHOD, new object[] { cpx, cpy, x, y });
+        public ValueTask<object> ArcAsync(double x, double y, double radius, double startAngle, double endAngle, bool? anticlockwise = null) => this.CallMethodAsync<object>(ARC_METHOD, anticlockwise.HasValue ? new object[] { x, y, radius, startAngle, endAngle, anticlockwise.Value } : new object[] { x, y, radius, startAngle, endAngle });
+        public ValueTask<object> ArcToAsync(double x1, double y1, double x2, double y2, double radius) => this.CallMethodAsync<object>(ARC_TO_METHOD, new object[] { x1, y1, x2, y2, radius });
+        public ValueTask<object> RectAsync(double x, double y, double width, double height) => this.CallMethodAsync<object>(RECT_METHOD, new object[] { x, y, width, height });
+        public ValueTask<object> FillAsync() => this.CallMethodAsync<object>(FILL_METHOD);
+        public ValueTask<object> StrokeAsync() => this.CallMethodAsync<object>(STROKE_METHOD);
+        public ValueTask<object> DrawFocusIfNeededAsync(ElementReference elementReference) => this.CallMethodAsync<object>(DRAW_FOCUS_IF_NEEDED_METHOD, new object[] { elementReference });
+        public ValueTask<object> ScrollPathIntoViewAsync() => this.CallMethodAsync<object>(SCROLL_PATH_INTO_VIEW_METHOD);
+        public ValueTask<object> ClipAsync() => this.CallMethodAsync<object>(CLIP_METHOD);
+        public ValueTask<bool> IsPointInPathAsync(double x, double y) => this.CallMethodAsync<bool>(IS_POINT_IN_PATH_METHOD, new object[] { x, y });
+        public ValueTask<bool> IsPointInStrokeAsync(double x, double y) => this.CallMethodAsync<bool>(IS_POINT_IN_STROKE_METHOD, new object[] { x, y });
+        public ValueTask<object> RotateAsync(float angle) => this.CallMethodAsync<object>(ROTATE_METHOD, new object[] { angle });
+        public ValueTask<object> ScaleAsync(double x, double y) => this.CallMethodAsync<object>(SCALE_METHOD, new object[] { x, y });
+        public ValueTask<object> TranslateAsync(double x, double y) => this.CallMethodAsync<object>(TRANSLATE_METHOD, new object[] { x, y });
+        public ValueTask<object> TransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethodAsync<object>(TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
+        public ValueTask<object> SetTransformAsync(double m11, double m12, double m21, double m22, double dx, double dy) => this.CallMethodAsync<object>(SET_TRANSFORM_METHOD, new object[] { m11, m12, m21, m22, dx, dy });
+        public ValueTask<object> SaveAsync() => this.CallMethodAsync<object>(SAVE_METHOD);
+        public ValueTask<object> RestoreAsync() => this.CallMethodAsync<object>(RESTORE_METHOD);
         #endregion
 
         #region Private Methods
-        private Task<T> GetPropertyAsync<T>(string property) => JSRuntime.Current.InvokeAsync<T>(GET_CANVAS_PROPERTY_ACTION, this.Canvas, property);
+        private ValueTask<T> GetPropertyAsync<T>(string property) => this.JSRuntime.InvokeAsync<T>(GET_CANVAS_PROPERTY_ACTION, this.Canvas, property);
 
-        private Task SetPropertyAsync(string property, object value) => JSRuntime.Current.InvokeAsync<object>(SET_CANVAS_PROPERTY_ACTION, this.Canvas, property, value);
+        private ValueTask<object> SetPropertyAsync(string property, object value) => this.JSRuntime.InvokeAsync<object>(SET_CANVAS_PROPERTY_ACTION, this.Canvas, property, value);
 
-        private Task<T> CallMethodAsync<T>(string method, params object[] values) => JSRuntime.Current.InvokeAsync<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method, values);
+        private ValueTask<T> CallMethodAsync<T>(string method, params object[] values) => this.JSRuntime.InvokeAsync<T>(CALL_CANVAS_METHOD_ACTION, this.Canvas, method, values);
 
         private IAsyncProperty<TNet> CreateEnumAsyncProperty<TNet>(string propertyName) where TNet : Enum => new CanvasAsyncProperty<TNet, string>(this.Canvas, propertyName, this.ToLowerInvariantString, this.ParseEnum<TNet>);
 
@@ -103,7 +107,7 @@ namespace Blazor.Extensions
 
         private string ToLowerInvariantString<T>(T value) where T : Enum => value.ToString().ToLowerInvariant();
 
-        public void Dispose() => Task.Run(() => JSRuntime.Current.InvokeAsync<object>(REMOVE_CANVAS_ACTION, this.Canvas));
+        public void Dispose() => Task.Run(() => this.JSRuntime.InvokeAsync<object>(REMOVE_CANVAS_ACTION, this.Canvas));
         #endregion
     }
 }

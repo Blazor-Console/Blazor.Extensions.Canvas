@@ -4,7 +4,7 @@ namespace Blazor.Extensions
 {
     public interface IAsyncProperty<T>
     {
-        Task<T> GetAsync();
-        Task SetAsync(T value);
+        ValueTask<T> GetAsync();
+        ValueTask SetAsync(T value);
     }
 }
