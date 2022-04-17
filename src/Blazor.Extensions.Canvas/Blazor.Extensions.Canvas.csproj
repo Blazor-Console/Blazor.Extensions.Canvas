@@ -15,6 +15,7 @@
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <RazorLangVersion>latest</RazorLangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
