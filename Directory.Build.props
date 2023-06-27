@@ -1,15 +1,15 @@
 <Project>
   <!-- Set common properties regarding assembly information and nuget packages -->
   <PropertyGroup>
-    <Authors>Blazor Extensions Contributors</Authors>
-    <Product>Blazor Extensions</Product>
-    <Copyright>(c) Blazor Extensions Contributors. All rights reserved.</Copyright>
-    <PackageLicenseUrl>https://github.com/BlazorExtensions/Canvas#license</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/BlazorExtensions/Canvas</PackageProjectUrl>
+    <Authors>HACC Blazor Extensions Contributors</Authors>
+    <Product> HACC Blazor Extensions</Product>
+    <Copyright>(c) HACC Blazor Extensions Contributors. All rights reserved.</Copyright>
+    <PackageLicenseUrl>https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas#license</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas</PackageProjectUrl>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/38994076?s%3D128%26v%3D4</PackageIconUrl>
-    <PackageTags>Microsoft ASP.NET Core Blazor Extensions Canvas</PackageTags>
+    <PackageTags>Microsoft ASP.NET Core HACC Blazor Extensions Canvas</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <RepositoryUrl>https://github.com/BlazorExtensions/Canvas</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>

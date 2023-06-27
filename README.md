@@ -1,18 +1,18 @@
 # Canvas
 HTML5 Canvas API implementation for Microsoft Blazor
 
-[![Build](https://github.com/Blazor-Console/Blazor.Extensions.Canvas/workflows/CI/badge.svg)](https://github.com/Blazor-Console/Blazor.Extensions.Canvas/actions)
-[![Package Version](https://img.shields.io/nuget/v/Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/Blazor.Extensions.Canvas)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/Blazor.Extensions.Canvas)
-[![License](https://img.shields.io/github/license/BlazorExtensions/Canvas.svg)](https://github.com/BlazorExtensions/Canvas/blob/master/LICENSE)
+[![Build](https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas/workflows/CI/badge.svg)](https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas/actions)
+[![Package Version](https://img.shields.io/nuget/v/HACC.Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/HACC.Blazor.Extensions.Canvas)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/HACC.Blazor.Extensions.Canvas.svg)](https://www.nuget.org/packages/HACC.Blazor.Extensions.Canvas)
+[![License](https://img.shields.io/github/license/HACCBlazorExtensions/Canvas.svg)](https://github.com/HACCBlazorExtensions/Canvas/blob/master/LICENSE)
 
-# Blazor Extensions
+# HACC Blazor Extensions
 
-Blazor Extensions are a set of packages with the goal of adding useful things to [Blazor](https://blazor.net).
+HACC Blazor Extensions are a set of packages with the goal of adding useful things to [Blazor](https://blazor.net).
 
-Project formerly maintained by [BlazorExtensions](https://github.com/BlazorExtensions/Canvas), but updated in 2022 by [Digital Defiance](htps://digitaldefiance.org).
+Project formerly maintained by [HACCBlazorExtensions](https://github.com/Blazor-Console/HACC.Blazor.Extensions.Canvas), but updated in 2022 by [Digital Defiance](htps://digitaldefiance.org).
 
-# Blazor Extensions Canvas
+# HACC Blazor Extensions Canvas
 
 This package wraps [HTML5 Canvas](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) APIs. 
 
@@ -35,13 +35,13 @@ Install-Package Blazor.Extensions.Canvas
 In your `index.html` file (WebAssembly Apps) or `_Host.cshtml` (Server Apps) file, place a reference to the library's script file:
 
 ```html
-<script src="_content/Blazor.Extensions.Canvas/blazor.extensions.canvas.js"></script>
+<script src="_content/HACC.Blazor.Extensions.Canvas/hacc.blazor.extensions.canvas.js"></script>
 ```
 
 In your `_Imports.razor` add the following `using` entry:
 
 ```c#
-@using Blazor.Extensions.Canvas
+@using HACC.Blazor.Extensions.Canvas
 ```
 
 In the component where you want to place a canvas element, add a `BECanvas`. Make sure to set the `ref` to a field on your component:
@@ -136,7 +136,7 @@ The project has been picked up for maintenance by [Digital Defiance](https://dig
 - [BDisp](https://github.com/BDisp)
 - [Rui Campos](https://github.com/ruifillipecampos)
 
-The following people are the original maintainers of the Blazor Extensions projects:
+The following people are the original maintainers of the HACC Blazor Extensions projects:
 
 - [Attila Hajdrik](https://github.com/attilah)
 - [Gutemberg Ribiero](https://github.com/galvesribeiro)
